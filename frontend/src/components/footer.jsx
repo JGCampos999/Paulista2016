@@ -6,7 +6,7 @@ const footer = () => {
         <div>
             <hr className="Hr" />
             <footer className="Footer">
-                JGCampos999 | FilipeGundim
+                JGCampos999 | FilipeGundim <br/>
                 © - All Rights Reserveds
             </footer>
         </div>

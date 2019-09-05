@@ -5,7 +5,7 @@ const header = () => {
     return (
         <div>
             <header className="Header">
-                Paulistão 2019
+                <h1>Paulistão 2019</h1>
             </header>
         </div>
     )
