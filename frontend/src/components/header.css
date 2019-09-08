@@ -1,7 +1,8 @@
 .Header{
+    margin: 0px;
     justify-content: center;
     text-align: center;
     color: #ffffff;
-    height: 80px;
+    height: 130px;
     background-color: rgb(50, 115, 220);
 }

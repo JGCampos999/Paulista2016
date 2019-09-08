@@ -1,0 +1,21 @@
+.NavBar{
+    float: left;
+    width: 180px;
+}
+
+.List{
+    list-style: none;
+    margin: 0px;
+    text-align: center;
+}
+
+.List-item{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    margin: 15px;
+}
+
+.A{
+    text-decoration: none;
+}
