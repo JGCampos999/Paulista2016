@@ -3,11 +3,9 @@ import './header.css'
 
 const header = () => {
     return (
-        <div>
-            <header className="Header">
-                <h1>Paulistão 2019</h1>
-            </header>
-        </div>
+        <header className="Header">
+            <h1>Paulistão 2019</h1>
+        </header>
     )
 }
 
