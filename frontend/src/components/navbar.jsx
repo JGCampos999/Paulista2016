@@ -3,15 +3,18 @@ import './navbar.css'
 
 const NavBar = () => {
     return (
-        <div>
-            <aside className = "NavBar">
-                <ul className = "List">
-                    <li className = "List-item"><a className = "A" href = "/table1">Table1</a></li>
-                    <li className = "List-item"><a className = "A" href = "/table2">Table2</a></li>
-                    <li className = "List-item"><a className = "A" href = "/table3">Table3</a></li>
-                    <li className = "List-item"><a className = "A" href = "/table4">Table4</a></li>                 
-                </ul>
-            </aside>
+        <div className="pos-f-t">
+            <div className="collapse" id="navbarToggleExternalContent">
+                <div className="p-3 mb-2 bg-success text-white">
+                    <h5 className="text-white h4">Conteúdo expandido</h5>
+                    <span className="text-muted">Expansível, atráves da marca no navbar.</span>
+                </div>
+            </div>
+            <nav class="navbar navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
         </div>
     )
 }
