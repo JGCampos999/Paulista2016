@@ -2,44 +2,44 @@ CREATE PROCEDURE sp_divGrp(@saida VARCHAR(MAX) OUTPUT)
 AS
 BEGIN
 	DECLARE @query VARCHAR(MAX), @qTimes INT, 
-            @idTime INT, @vrG INT, @vrfT INT,
-            @grupo CHAR(1), @aleatorio INT
+		@idTime INT, @vrG INT, @vrfT INT,
+		@grupo CHAR(1), @aleatorio INT
 	SELECT @qTimes = COUNT(cod_Time) FROM Grupos
 	IF(@qTimes = 20)
 	BEGIN
 		SET @query = 'DELETE FROM Grupos'
 		EXEC(@query)
-        SET @query = 'DELETE FROM Jogos'
+        	SET @query = 'DELETE FROM Jogos'
 		EXEC(@query)
 	END
 	SET @query = 'INSERT INTO Grupos VALUES (''A'', 5),(''B'', 16),(''C'', 12),(''D'', 19)'
 	EXEC(@query)
-    SET @idTime = 0
-    WHILE @idTime < 20
-    BEGIN
-        SET @idTime += 1
-        SELECT @vrfT = (SELECT cod_Time FROM Grupos WHERE cod_Time = @idTime)
-        IF (@vrfT IS NULL)
-        BEGIN
-            SET @aleatorio = RAND()*(4-0)+1
-            IF (@aleatorio = 1) SET @grupo = 'A'
-            ELSE IF (@aleatorio = 2) SET @grupo = 'B'
-            ELSE IF (@aleatorio = 3) SET @grupo = 'C'
-            ELSE IF (@aleatorio = 4) SET @grupo = 'D'
-            SELECT @vrfG = (SELECT COUNT(id_Grupo) FROM Grupos WHERE id_Grupo = @grupo)
-            WHILE @vrfG > 4
-            BEGIN
-                SET @aleatorio = RAND()*(4-0)+1
-                IF (@aleatorio = 1) SET @grupo = 'A'
-                ELSE IF (@aleatorio = 2) SET @grupo = 'B'
-                ELSE IF (@aleatorio = 3) SET @grupo = 'C'
-                ELSE IF (@aleatorio = 4) SET @grupo = 'D'
-                SELECT @vrfG = (SELECT COUNT(id_Grupo) FROM Grupos WHERE id_Grupo = @grupo)
-            END
-            SET @query = 'INSERT INTO Grupos VALUES ('''+@grupo+''','+CAST(@idTime AS VARCHAR)+')'
-            EXEC (@query)
-        END
-    END
+	SET @idTime = 0
+	WHILE @idTime < 20
+	BEGIN
+		SET @idTime += 1
+		SELECT @vrfT = (SELECT cod_Time FROM Grupos WHERE cod_Time = @idTime)
+		IF (@vrfT IS NULL)
+		BEGIN
+			SET @aleatorio = RAND()*(4-0)+1
+			IF (@aleatorio = 1) SET @grupo = 'A'
+			ELSE IF (@aleatorio = 2) SET @grupo = 'B'
+			ELSE IF (@aleatorio = 3) SET @grupo = 'C'
+			ELSE IF (@aleatorio = 4) SET @grupo = 'D'
+			SELECT @vrfG = (SELECT COUNT(id_Grupo) FROM Grupos WHERE id_Grupo = @grupo)
+			WHILE @vrfG > 4
+			BEGIN
+				SET @aleatorio = RAND()*(4-0)+1
+				IF (@aleatorio = 1) SET @grupo = 'A'
+				ELSE IF (@aleatorio = 2) SET @grupo = 'B'
+				ELSE IF (@aleatorio = 3) SET @grupo = 'C'
+				ELSE IF (@aleatorio = 4) SET @grupo = 'D'
+				SELECT @vrfG = (SELECT COUNT(id_Grupo) FROM Grupos WHERE id_Grupo = @grupo)
+		    	END
+			SET @query = 'INSERT INTO Grupos VALUES ('''+@grupo+''','+CAST(@idTime AS VARCHAR)+')'
+			EXEC (@query)
+		END
+	END
 END
 
 CREATE DATABASE Testes
