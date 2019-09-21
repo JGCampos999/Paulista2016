@@ -6,11 +6,11 @@ const NavBar = () => {
         <div className="pos-f-t" id="bla">
             <div className="collapse" id="navbarToggleExternalContent">
                 <div className="p-3 bg-info text-white">
-                    <h5 className="text-white h4"><a className="link" href='/sorteio'>Sorteio</a></h5>
-                    <h5 className="text-white h4"><a className="link" href='/tabela'>tabela1</a></h5>
-                    <h5 className="text-white h4"><a className="link" href='/tabela'>tabela2</a></h5>
-                    <h5 className="text-white h4"><a className="link" href='/tabela'>tabela3</a></h5>
-                    <h5 className="text-white h4"><a className="link" href='/tabela'>tabela4</a></h5>
+                    <h5 className="text-white h4"><a style={styleA} onClick={getData()} href='/sorteio'>Sorteio</a></h5>
+                    <h5 className="text-white h4"><a style={styleA} href='/tabela'>tabela1</a></h5>
+                    <h5 className="text-white h4"><a style={styleA} href='/tabela'>tabela2</a></h5>
+                    <h5 className="text-white h4"><a style={styleA} href='/tabela'>tabela3</a></h5>
+                    <h5 className="text-white h4"><a style={styleA} href='/tabela'>tabela4</a></h5>
                 </div>
             </div>
             <nav className="navbar navbar-dark bg-info">
@@ -20,6 +20,15 @@ const NavBar = () => {
             </nav>
         </div>
     )
+}
+
+const styleA = {
+    textDecoration : 'none',
+    color: '#ffffff'
+}
+
+function getData(){
+    
 }
 
 export default NavBar;
