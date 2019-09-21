@@ -10,6 +10,13 @@ var config = {
     database: 'Testes'
 };
 
+app.use("/", (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+    next()
+})
+
 app.get('/times', (req, res) => {
     request.query("SELECT * FROM Times", (err, recordset) => {
         if (err) {
@@ -31,9 +38,9 @@ app.get('/grupos', (req, res) => {
 )
 
 app.listen(3001, () => {
-    sql.connect(config).then(()=>{
+    sql.connect(config).then(() => {
         console.log("se pa foi")
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err)
     });
     request = new sql.Request();

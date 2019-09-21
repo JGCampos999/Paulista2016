@@ -1,12 +1,11 @@
 import React from 'react'
-import './footer.css'
 
 const footer = () => {
     return (
         <div>
-            <hr className="Hr" />
-            <footer className="Footer">
-                JGCampos999 | FilipeGundim <br/>
+            <hr style={hrStyle} />
+            <footer style={footerStyle}>
+                JGCampos999 | FilipeGundim <br />
                 © - All Rights Reserveds
             </footer>
         </div>
@@ -14,3 +13,13 @@ const footer = () => {
 }
 
 export default footer;
+
+const hrStyle = {
+    marginLeft: '30%',
+    marginRight: '30%'
+}
+
+const footerStyle = {
+    justifyContent: 'center',
+    textAlign: 'center'
+}
