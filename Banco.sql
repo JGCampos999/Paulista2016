@@ -1,3 +1,51 @@
+CREATE PROCEDURE sp_divGrp(@saida VARCHAR(MAX) OUTPUT)
+AS
+BEGIN
+	DECLARE @query VARCHAR(MAX), @qTimes INT, 
+		@idTime INT, @vrG INT, @vrfT INT,
+		@grupo CHAR(1), @aleatorio INT
+	SELECT @qTimes = COUNT(cod_Time) FROM Grupos
+	IF(@qTimes = 20)
+	BEGIN
+		SET @query = 'DELETE FROM Grupos'
+		EXEC(@query)
+        	SET @query = 'DELETE FROM Jogos'
+		EXEC(@query)
+	END
+	SET @query = 'INSERT INTO Grupos VALUES (''A'', 5),(''B'', 16),(''C'', 12),(''D'', 19)'
+	EXEC(@query)
+	SET @idTime = 0
+	WHILE @idTime < 20
+	BEGIN
+		SET @idTime += 1
+		SELECT @vrfT = (SELECT cod_Time FROM Grupos WHERE cod_Time = @idTime)
+		IF (@vrfT IS NULL)
+		BEGIN
+			SET @aleatorio = RAND()*(4-0)+1
+			IF (@aleatorio = 1) SET @grupo = 'A'
+			ELSE IF (@aleatorio = 2) SET @grupo = 'B'
+			ELSE IF (@aleatorio = 3) SET @grupo = 'C'
+			ELSE IF (@aleatorio = 4) SET @grupo = 'D'
+			SELECT @vrfG = (SELECT COUNT(id_Grupo) FROM Grupos WHERE id_Grupo = @grupo)
+			WHILE @vrfG > 4
+			BEGIN
+				SET @aleatorio = RAND()*(4-0)+1
+				IF (@aleatorio = 1) SET @grupo = 'A'
+				ELSE IF (@aleatorio = 2) SET @grupo = 'B'
+				ELSE IF (@aleatorio = 3) SET @grupo = 'C'
+				ELSE IF (@aleatorio = 4) SET @grupo = 'D'
+				SELECT @vrfG = (SELECT COUNT(id_Grupo) FROM Grupos WHERE id_Grupo = @grupo)
+		    	END
+			SET @query = 'INSERT INTO Grupos VALUES ('''+@grupo+''','+CAST(@idTime AS VARCHAR)+')'
+			EXEC (@query)
+		END
+	END
+END
+
+CREATE DATABASE Testes
+GO
+USE Testes
+
 CREATE TABLE Times(
     codigo_Time             INT             NOT NULL    PRIMARY KEY,
     nome_Time               VARCHAR(40)     NOT NULL,
@@ -5,10 +53,10 @@ CREATE TABLE Times(
     estadio                 VARCHAR(40)     NOT NULL
 )
 CREATE TABLE Grupos(
-    Grupo                   CHAR(1)         NOT NULL,
+    id_Grupo                CHAR(1)         NOT NULL,
     cod_Time                INT             NOT NULL,
     FOREIGN KEY (cod_Time)  REFERENCES      Times(codigo_Time),
-    PRIMARY KEY (id_Grupo, cod_Time)
+    PRIMARY KEY (cod_Time)
 )
 CREATE TABLE Jogos(
     cod_TimeA               INT             NOT NULL,
@@ -17,12 +65,11 @@ CREATE TABLE Jogos(
     gols_TimeB              INT             NOT NULL,
     data                    DATE            NOT NULL
     FOREIGN KEY (cod_TimeA) REFERENCES Times(codigo_Time),
-    FOREIGN KEY (cod_TimeB) REFERENCES Times(codigo_Time),
-    PRIMARY KEY (cod_TimeA, cod_TimeB)
+    FOREIGN KEY (cod_TimeB) REFERENCES Times(codigo_Time)
 )
 
 INSERT INTO Times VALUES
-(1, 'Esporte Água Sant', 'Diadema', 'Distrital do Inamar'),
+(1, 'Esporte Água Santa', 'Diadema', 'Distrital do Inamar'),
 (2, 'Grêmio Osasco Audax', 'Osasco', 'José Liberatti'),
 (3, 'Botafogo Futebol Clube', 'Ribeirão Preto', 'Santa Cruz'),
 (4, 'Capivariano Futebol Clube', 'Capivari', 'Arena Capivari'),
@@ -43,17 +90,5 @@ INSERT INTO Times VALUES
 (19, 'São Paulo Futebol Clube', 'São Paulo', 'Morumbi'),
 (20, 'Esporte Clube XV de Novembro', 'Piracicaba', 'Barão de Serra Negra')
 
-CREATE PROCEDURE sp_insrtGrp(
-            @grp CHAR(1),
-            @time INT,
-            @saida VARCHAR(MAX) OUTPUT)
-AS
-BEGIN
-    DECLARE @query  VARCHAR(MAX)
-    IF (@grp <> 'A' AND @grp <> 'B' AND @grp <> 'C' AND @grp <> 'D')
-    BEGIN
-        SET @saida = 'Grupo Inexistente'
-    END
-    ELSE
-    BEGIN
-        
+DECLARE @out VARCHAR(MAX)
+EXEC sp_insrtGrp @out output
