@@ -1,7 +1,6 @@
 var express = require('express')
 var app = express()
 var sql = require('mssql')
-var request = ''
 
 var config = {
     user: 'Filipe',

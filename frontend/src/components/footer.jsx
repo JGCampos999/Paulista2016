@@ -21,5 +21,6 @@ const hrStyle = {
 
 const footerStyle = {
     justifyContent: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: '20px'
 }
