@@ -8,12 +8,18 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 export default class SimpleTable extends React.Component {
-
     constructor(props) {
         super(props)
         this.getTimes()
         this.state = { rows: [] }
-        console.log(this.state.rows)
+    }
+
+    rootStyle = {
+        width: '800px',
+        marginTop:'20px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        overflowX: 'auto'
     }
 
     getTimes() {
@@ -29,8 +35,8 @@ export default class SimpleTable extends React.Component {
 
     render() {
         return (
-            <Paper >
-                <Table >
+            <Paper style={this.rootStyle}>
+                <Table  >
                     <TableHead>
                         <TableRow>
                             <TableCell align="right">Codigo</TableCell>
@@ -41,7 +47,7 @@ export default class SimpleTable extends React.Component {
                     </TableHead>
                     <TableBody>
                         {this.state.rows.map(row => (
-                            <TableRow onClick={()=>console.log(row)} key={row.codigo_Time}>
+                            <TableRow key={row.codigo_Time}>
                                 <TableCell align="right">{row.codigo_Time}</TableCell>
                                 <TableCell align="left">{row.nome_Time}</TableCell>
                                 <TableCell align="left">{row.cidade}</TableCell>

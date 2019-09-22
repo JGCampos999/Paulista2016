@@ -7,9 +7,7 @@ const NavBar = () => {
                 <div className="p-3 bg-info text-white">
                     <h5 className="text-white h4"><a style={styleA} href='/sorteio'>Sorteio</a></h5>
                     <h5 className="text-white h4"><a style={styleA} href='/Times'>Times</a></h5>
-                    <h5 className="text-white h4"><a style={styleA} href='/tabela'>tabela2</a></h5>
-                    <h5 className="text-white h4"><a style={styleA} href='/tabela'>tabela3</a></h5>
-                    <h5 className="text-white h4"><a style={styleA} href='/tabela'>tabela4</a></h5>
+                    <h5 className="text-white h4"><a style={styleA} href='/grupos'>Grupos</a></h5>
                 </div>
             </div>
             <nav className="navbar navbar-dark bg-info">
