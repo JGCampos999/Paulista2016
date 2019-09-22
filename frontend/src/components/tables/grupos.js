@@ -15,7 +15,7 @@ export default class Grupos extends React.Component{
     }
 
     rootStyle = {
-        width: '800px',
+        width: '200px',
         marginTop:'20px',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -36,8 +36,8 @@ export default class Grupos extends React.Component{
                 <Table  >
                     <TableHead>
                         <TableRow>
-                            <TableCell align="right">grupo</TableCell>
-                            <TableCell align="left">codigo_Time</TableCell>
+                            <TableCell align="right">Grupo</TableCell>
+                            <TableCell align="left">codigo do Time</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
