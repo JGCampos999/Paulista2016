@@ -1,3 +1,24 @@
+CREATE VIEW v_jgs AS
+SELECT jg.id_Jogo, tm.nome_Time AS 'Time A'
+FROM Times tm
+INNER JOIN Jogos jg 
+ON jg.cod_TimeA = tm.codigo_Time
+
+CREATE View v_jgs2 AS
+SELECT jg.id_Jogo, tm.nome_Time AS 'Time B'
+FROM Times tm
+INNER JOIN Jogos jg 
+ON jg.cod_TimeB = tm.codigo_Time
+
+CREATE VIEW v_Jogos AS
+SELECT [Time A], [Time B], jg.gols_TimeA AS 'Gols Time A', jg.gols_TimeB AS 'Gols Time B', jg.data AS 'Data do Jogo'
+FROM v_jgs v1, v_jgs2 v2
+INNER JOIN Jogos jg
+ON jg.id_Jogo = v2.[id_Jogo]
+WHERE v1.[id_Jogo] = v2.[id_Jogo]
+
+--Pra exibir os jogos, usar select * from v_Jogos (Tem que criar essa e as outras views antes)
+
 CREATE PROCEDURE sp_geraJogos
 AS
 BEGIN
@@ -21,10 +42,11 @@ BEGIN
             @gols1  INT,    @gols2  INT,
             @cnt1   INT,    @cnt2   INT,
             @cnt3   INT,    @cntGrp INT,
-            @grupo  CHAR(1)
+            @cnt4	INT,	@grupo  CHAR(1)
     SET @cnt1 = 0
 	SET @cnt2 = 0
     SET @cnt3 = 1
+	SET @cnt4 = 0
     SET @data = GETDATE()
     SET @grupo = 'A'
     SET @cntGrp = 1
@@ -75,6 +97,7 @@ BEGIN
 	SET @cntGrp = (SELECT COUNT(id) FROM @jogosTable)
 	WHILE @cntGrp <> 0
 	BEGIN
+		SET @cnt4 += 1
 		SET @cnt3 += 1
 		IF @cntGrp = 1 
 		BEGIN
@@ -108,9 +131,10 @@ BEGIN
 		DELETE FROM @jogosTable WHERE id = @randN
 		UPDATE @jogosTable SET id = id - 1 WHERE id > @randN
 		IF @cntGrp <> 0 SET @cntGrp = (SELECT COUNT(id) FROM @jogosTable)
-		SET @query = 'INSERT INTO Jogos VALUES ('+CAST(@t1 AS VARCHAR)+', '+
-		CAST(@t2 AS VARCHAR)+', '+CAST(@gols1 AS VARCHAR)+', '+
-		CAST(@gols2 AS VARCHAR)+', '''+CAST(@data AS VARCHAR)+''')'
+		SET @query = 'INSERT INTO Jogos VALUES ('+CAST(@cnt4 AS VARCHAR)+', '
+		+CAST(@t1 AS VARCHAR)+', '+CAST(@t2 AS VARCHAR)+', '
+		+CAST(@gols1 AS VARCHAR)+', '+CAST(@gols2 AS VARCHAR)+', '''
+		+CAST(@data AS VARCHAR)+''')'
 		EXEC(@query)
 	END
 END
@@ -176,6 +200,7 @@ CREATE TABLE Grupos(
     PRIMARY KEY (cod_Time)
 )
 CREATE TABLE Jogos(
+    id_Jogo		    INT             NOT NULL,
     cod_TimeA               INT             NOT NULL,
     cod_TimeB               INT             NOT NULL,
     gols_TimeA              INT             NOT NULL,
