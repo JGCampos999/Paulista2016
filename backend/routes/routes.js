@@ -27,7 +27,7 @@ app.get('/times', (req, res) => {
 )
 
 app.get('/grupos', (req, res) => {
-    request.query("SELECT * FROM grupos", (err, recordset) => {
+    request.query("select \ng.id_Grupo, \nt.nome_Time \nfrom grupos as g \ninner join times as t \non g.cod_Time = t.codigo_Time", (err, recordset) => {
         if (err) {
             console.log(err)
         }
@@ -35,6 +35,25 @@ app.get('/grupos', (req, res) => {
     })
 }
 )
+
+app.get('/gerarSorteio', (req, res)=>{
+    request.query("delete  from jogos", (err, recordset)=>{
+        if(err){
+            console.log(err)
+        }
+        request.query("exec sp_geraJogos",(err, recordset)=>{
+            if(err){
+                console.log(err)
+            }
+            request.query("select * from v_Jogos", (err, recordset)=>{
+                if(err){
+                    console.log(err)
+                }
+                res.send(recordset)
+            })
+        })
+    })
+})
 
 app.listen(3001, () => {
     sql.connect(config).then(() => {

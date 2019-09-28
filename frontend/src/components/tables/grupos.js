@@ -15,7 +15,7 @@ export default class Grupos extends React.Component{
     }
 
     rootStyle = {
-        width: '200px',
+        width: '400px',
         marginTop:'20px',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -37,14 +37,14 @@ export default class Grupos extends React.Component{
                     <TableHead>
                         <TableRow>
                             <TableCell align="right">Grupo</TableCell>
-                            <TableCell align="left">codigo do Time</TableCell>
+                            <TableCell align="left">Nome do Time</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.state.rows.map(row => (
                             <TableRow key={row.id_Grupo}>
                                 <TableCell align="right">{row.id_Grupo}</TableCell>
-                                <TableCell align="left">{row.cod_Time}</TableCell>
+                                <TableCell align="left">{row.nome_Time}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
