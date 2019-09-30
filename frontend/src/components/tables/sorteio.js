@@ -10,17 +10,32 @@ import Paper from '@material-ui/core/Paper';
 export default class Sorteio extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { rows: [] }
+        this.state = {
+             rows: [],
+            data: this.date
+        }
     }
+    date = new Date()
 
     getSorteio() {
         let url = "http://localhost:3001/gerarSorteio"
         axios.get(url).then(res => {
             let data = res.data
             const sorteio = data.recordset
-            this.setState({ rows: sorteio })
+            this.setState({ 
+                rows: sorteio
+             })
         }).catch(err => {
             console.log(err)
+        })
+    }
+
+    getByDate(data){
+        let url = "http://localhost:3001/sorteio:data"
+        axios.post(url, data).then(res=>{
+            const data = res.data
+            let recordset = data.recordsets
+            this.setState({rows: recordset})
         })
     }
 
@@ -44,6 +59,12 @@ export default class Sorteio extends React.Component {
                     <br />
                     <br />
                     O sorteio é realizado de forma aleatória
+                    <br />
+                    <br />
+                    <input type = "date" onChange={(e)=>{this.setState({data: e.target.value})}}/>
+                    <br/>
+                    <br/>
+                    <button type="button" class="btn btn-primary" onClick={()=>{this.getByDate(this.state.data)}}>selecionar por data</button>
                 </aside>
                 <aside >
                     <Paper style={this.rootStyle}>
@@ -64,7 +85,7 @@ export default class Sorteio extends React.Component {
                                         <TableCell align="left">{row.Time_B}</TableCell>
                                         <TableCell align="left">{row.Gols_Time_A}</TableCell>
                                         <TableCell align="left">{row.Gols_Time_B}</TableCell>
-                                        <TableCell align="left">{row.Data.replace("T00:00:00.000Z", "")}</TableCell>
+                                        <TableCell align="left">{row.dataFormatada}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
