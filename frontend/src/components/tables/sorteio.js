@@ -11,11 +11,10 @@ export default class Sorteio extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-             rows: [],
-            data: this.date
+            rows: [],
+            data : 0
         }
     }
-    date = new Date()
 
     getSorteio() {
         let url = "http://localhost:3001/gerarSorteio"
@@ -30,11 +29,14 @@ export default class Sorteio extends React.Component {
         })
     }
 
-    getByDate(data){
-        let url = "http://localhost:3001/sorteio:data"
-        axios.post(url, data).then(res=>{
+    getByDate(_data){
+        let url = "http://localhost:3001/sorteio"
+        let data= _data
+        
+        axios.post(url, JSON.stringify(data)).then(res=>{
             const data = res.data
             let recordset = data.recordsets
+            console.log(recordset)
             this.setState({rows: recordset})
         })
     }
@@ -85,7 +87,7 @@ export default class Sorteio extends React.Component {
                                         <TableCell align="left">{row.Time_B}</TableCell>
                                         <TableCell align="left">{row.Gols_Time_A}</TableCell>
                                         <TableCell align="left">{row.Gols_Time_B}</TableCell>
-                                        <TableCell align="left">{row.dataFormatada}</TableCell>
+                                        <TableCell align="left">{row.Data.replace("T00:00:00.000Z", "")}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

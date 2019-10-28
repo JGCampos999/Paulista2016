@@ -1,6 +1,7 @@
 var express = require('express')
 var app = express()
 var sql = require('mssql')
+var bodyParser = require('body-parser')
 
 var config = {
     user: 'Filipe',
@@ -13,6 +14,7 @@ app.use("/", (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+    bodyParser.json()
     next()
 })
 
@@ -26,9 +28,11 @@ app.get('/times', (req, res) => {
 }
 )
 
-app.post('/sorteio:data', (req, res)=>{
-    let data = req.params.data
-    request.query(`select *, convert(char(10),data,103) as dataFormatada from jogos where data = (cast('${data}' as date))`, (err, recordset)=>{
+app.post('/sorteio', (req, res)=>{
+    let body = JSON.stringify(req.body)
+    let data = body.data
+    console.log(data)
+    request.query(`select * from jogos where data = (cast('${data}' as date))`, (err, recordset)=>{
         if(err){
             console.log(err)
         }
@@ -37,7 +41,7 @@ app.post('/sorteio:data', (req, res)=>{
 })
 
 app.get('/grupos', (req, res) => {
-    request.query("exec sp_divGrp", (err, recordset1)=>{
+    request.query("exec sp_divGrp", (err, recordset)=>{
         if(err){
             console.log(err)
         }
