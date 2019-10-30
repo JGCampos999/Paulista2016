@@ -4,7 +4,7 @@ Campeonato = fn_Champ
 Quartas de Final = fn_4_final
 
 NOVO JEITO DE RETORNAR OS JOGOS:
-SELECT timeA AS 'Time Casa', timeB AS 'Time Fora', golsA AS 'Gols Casa', golsB AS 'Gols Fora', CONVERT(VARCHAR,data,103) AS 'Data do Jogo'
+SELECT timeA AS 'Time A', timeB AS 'Time B', golsA AS 'Gols Time A', golsB AS 'Gols Time B', CONVERT(VARCHAR, data, 103) AS 'Data do Jogo'
 FROM fn_mostraJogos()*/
 
 CREATE PROCEDURE sp_mudaFinal (@id INT, @golsA INT, @golsB INT)
