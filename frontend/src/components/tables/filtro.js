@@ -15,13 +15,15 @@ class Filtro extends React.Component {
         this.state = {
             rows: [],
             data: 0, 
-            open: false
+            open: false,
+            selected: {}
         }
     }
 
-    handleOpen = () => {
+    handleOpen = (selected) => {
         this.setState({
-            open: true
+            open: true,
+            selected 
         });
     };
 
@@ -91,14 +93,14 @@ class Filtro extends React.Component {
                                         <TableCell align="left">{row.gols_TimeB}</TableCell>
                                         <TableCell align="left">{row.data.replace("T00:00:00.000Z", "")}</TableCell>
                                         <TableCell align="left"><button type="button" className="btn btn-sm btn-primary"
-                                        onClick={()=>{this.handleOpen()} } onClose={()=>{this.handleClose()}}>Editar</button> </TableCell>
+                                        onClick={()=>{this.handleOpen(row)} } >Editar</button> </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
                     </Paper>`
                 </aside>
-                <Modal status={this.state.open}/>
+                <Modal show={this.state.open} date={this.state.selected}  close={() => this.handleClose() }/>
             </div>           
         )
     }

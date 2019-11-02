@@ -1,38 +1,29 @@
 import React from 'react'
-import Modal from '@material-ui/core/Modal';
+import {Modal, Button} from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 
 const Window = (props) => {
 
-    const useStyles = makeStyles(theme => ({
-        paper: {
-            position: 'absolute',
-            width: 400,
-            backgroundColor: theme.palette.background.paper,
-            border: '2px solid #000',
-            boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3),
-        },
-    }));
+   
 
-    const classes = useStyles()
-
-    var status = props.status
+    let show = props.show;
+    let id = props.date.id_Jogo ? props.date.id_Jogo : 'fodase'
 
     return (
-        <div>
-            <Modal aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description"
-                open={props.status}
-                onClose={status=false}
-                className={classes.paper}
-            >
-                <div >
-                    <h2 id="simple-modal-title">Editar as configurações do jogo.</h2>
-                    <p id="simple-modal-description">
-                    </p>
-                </div>
-            </Modal>
-        </div>
+        <Modal show={show} onHide={show}>
+        <Modal.Header closeButton>
+          <Modal.Title>{props.date.data}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={ props.close }>
+            Close
+          </Button>
+          <Button variant="primary">
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     )
 }
 
