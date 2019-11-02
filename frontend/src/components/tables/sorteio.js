@@ -19,8 +19,7 @@ export default class Sorteio extends React.Component {
         let url = "http://localhost:3001/gerarSorteio"
         axios.get(url).then(res => {
             let data = res.data
-
-            const sorteio = data.recordset
+            const sorteio =  data.recordset
             this.setState({
                 rows: sorteio
             })
@@ -50,7 +49,6 @@ export default class Sorteio extends React.Component {
                     <br />
                     O sorteio é realizado de forma aleatória
                     <br />
-                    <br />
                 </aside>
                 <aside >
                     <Paper style={this.rootStyle}>
@@ -62,7 +60,6 @@ export default class Sorteio extends React.Component {
                                     <TableCell align="left">Gols Time A</TableCell>
                                     <TableCell align="left">Gols Time B</TableCell>
                                     <TableCell align="left">Data do Jogo</TableCell>
-                                    <TableCell align="left"> </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

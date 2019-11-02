@@ -12,6 +12,7 @@ export default class SimpleTable extends React.Component {
         super(props)
         this.getTimes()
         this.state = { rows: [] }
+        
     }
 
     rootStyle = {

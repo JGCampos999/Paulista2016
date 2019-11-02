@@ -4,6 +4,7 @@ import Times from './times'
 import Grupos from './grupos'
 import Sorteio from './sorteio'
 import Filtro from './filtro'
+import Rebaixados from './rebaixados'
 import GruposSeparados from './gruposSeparados'
 
 const Router = () => {
@@ -16,9 +17,12 @@ const Router = () => {
           <Route path="/Grupos" component={Grupos} />
           <Route path="/sorteio" component={Sorteio} />
           <Route path="/filtro" component={Filtro} />
-          <Route path="/GrupoSeparados" component = {GruposSeparados} />
+          <Route path="/rebaixados" component={Rebaixados} />
+          <Route path="/GrupoSeparados" component={GruposSeparados} />
         </Switch>
       </BrowserRouter>
+
+
     </div>
   )
 }

@@ -15,7 +15,7 @@ class Filtro extends React.Component {
         this.state = {
             rows: [],
             data: 0, 
-            open: ""
+            open: false
         }
     }
 
@@ -31,17 +31,18 @@ class Filtro extends React.Component {
         });
     };
 
-    getByDate(_data) {
-        let url = "http://localhost:3001/filtro"
-        let body = {
-            data: _data
-        }
-
-        axios.post(url, JSON.stringify(body)).then(res => {
+    getByDate(data) {
+        let url = `http://localhost:3001/filtro/${data}`
+        
+            axios.get(url).then(res => {
             const data = res.data
-            let recordset = data.recordsets
-            console.log(recordset)
-            this.setState({ rows: recordset })
+            let recordset = data.recordsets[0]
+            this.setState({ 
+                rows: recordset
+            })
+            console.log(this.state.rows)
+        }).catch( err => {
+            console.log(err)
         })
     }
 
@@ -67,35 +68,37 @@ class Filtro extends React.Component {
                     <button type="button" className="btn btn-primary" onClick={() => { this.getByDate(this.state.data) }}>selecionar por data</button>
                 </aside>
                 <aside >
-                    <Paper style={this.rootStyle}>
+                `    <Paper style={this.rootStyle}>
                         <Table  >
                             <TableHead>
                                 <TableRow>
+                                    <TableCell align="right">ID do Jogo</TableCell>
                                     <TableCell align="right">Codigo Time A</TableCell>
                                     <TableCell align="left">Codigo Time B</TableCell>
                                     <TableCell align="left">Gols Time A</TableCell>
                                     <TableCell align="left">Gols Time B</TableCell>
                                     <TableCell align="left">Data do Jogo</TableCell>
-                                    <TableCell align="left"> </TableCell>
+                                    <TableCell align="left"> Opções </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {this.state.rows.map(row => (
-                                    <TableRow key={row.id_jogo}>
+                                    <TableRow key={row.id_Jogo}>
+                                        <TableCell align="right">{row.id_Jogo}</TableCell>
                                         <TableCell align="right">{row.cod_TimeA}</TableCell>
                                         <TableCell align="left">{row.cod_TimeB}</TableCell>
                                         <TableCell align="left">{row.gols_TimeA}</TableCell>
                                         <TableCell align="left">{row.gols_TimeB}</TableCell>
-                                        <TableCell align="left">{row.data}</TableCell>
-                                        <TableCell align="left"><button type="button" class="btn btn-sm btn-primary"
+                                        <TableCell align="left">{row.data.replace("T00:00:00.000Z", "")}</TableCell>
+                                        <TableCell align="left"><button type="button" className="btn btn-sm btn-primary"
                                         onClick={()=>{this.handleOpen()} } onClose={()=>{this.handleClose()}}>Editar</button> </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
-                    </Paper>
+                    </Paper>`
                 </aside>
-                <Modal open={this.state.open}/>
+                <Modal status={this.state.open}/>
             </div>           
         )
     }

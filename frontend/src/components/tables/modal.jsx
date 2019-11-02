@@ -17,16 +17,18 @@ const Window = (props) => {
 
     const classes = useStyles()
 
+    var status = props.status
+
     return (
         <div>
             <Modal aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description"
-                open={props.open}
+                open={props.status}
+                onClose={status=false}
                 className={classes.paper}
             >
-                <div>
+                <div >
                     <h2 id="simple-modal-title">Editar as configurações do jogo.</h2>
                     <p id="simple-modal-description">
-
                     </p>
                 </div>
             </Modal>
