@@ -1,9 +1,9 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "routes.js",
   "scripts": {
+    "start": "nodemon ./routes/routes.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,5 +12,7 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mssql": "^5.1.0"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

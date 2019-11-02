@@ -10,13 +10,24 @@ var config = {
     database: 'Testes'
 };
 
-app.use("/", (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
-    bodyParser.json()
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST')
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization'),
     next()
-})
+  })
+
+app.use(bodyParser.json());
+
+app.listen(3001, () => {
+    sql.connect(config).then(() => {
+        console.log("se pa foi")
+    }).catch((err) => {
+        console.log(err)
+    });
+    request = new sql.Request();
+});
 
 app.get('/times', (req, res) => {
     request.query("SELECT * FROM Times", (err, recordset) => {
@@ -28,15 +39,18 @@ app.get('/times', (req, res) => {
 }
 )
 
-app.post('/sorteio', (req, res)=>{
+app.post('/filtro', (req, res)=>{
+
     let body = JSON.stringify(req.body)
     let data = body.data
+
     console.log(data)
-    request.query(`select * from jogos where data = (cast('${data}' as date))`, (err, recordset)=>{
+
+    request.query('select * from jogos where data = '2019-11-03'", (err, recordset)=>{
         if(err){
             console.log(err)
         }
-        res.send(recordset)
+        res.json(recordset)
     })
 })
 
@@ -107,12 +121,4 @@ app.get('/TimeD', (req, res)=>{
         }
         res.json(recordset)
     })
-})
-app.listen(3001, () => {
-    sql.connect(config).then(() => {
-        console.log("se pa foi")
-    }).catch((err) => {
-        console.log(err)
-    });
-    request = new sql.Request();
 })

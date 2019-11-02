@@ -9,6 +9,7 @@
     "create-react-app": "^3.1.1",
     "express": "^4.17.1",
     "mssql": "^5.1.0",
+    "query-string": "^6.8.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",

@@ -11,8 +11,7 @@ export default class Sorteio extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rows: [],
-            data : 0
+            rows: []
         }
     }
 
@@ -20,24 +19,13 @@ export default class Sorteio extends React.Component {
         let url = "http://localhost:3001/gerarSorteio"
         axios.get(url).then(res => {
             let data = res.data
+
             const sorteio = data.recordset
-            this.setState({ 
+            this.setState({
                 rows: sorteio
-             })
+            })
         }).catch(err => {
             console.log(err)
-        })
-    }
-
-    getByDate(_data){
-        let url = "http://localhost:3001/sorteio"
-        let data= _data
-        
-        axios.post(url, JSON.stringify(data)).then(res=>{
-            const data = res.data
-            let recordset = data.recordsets
-            console.log(recordset)
-            this.setState({rows: recordset})
         })
     }
 
@@ -57,16 +45,12 @@ export default class Sorteio extends React.Component {
         return (
             <div>
                 <aside className="ml-5 float-left text-center" style={this.asideStyle}>
-                    <button type="button" class="btn btn-primary" onClick={() => this.getSorteio()}>Sortear</button>
+                    <button type="button" class="btn btn-primary" onClick={() => { this.getSorteio() }}>Sortear</button>
                     <br />
                     <br />
                     O sorteio é realizado de forma aleatória
                     <br />
                     <br />
-                    <input type = "date" onChange={(e)=>{this.setState({data: e.target.value})}}/>
-                    <br/>
-                    <br/>
-                    <button type="button" class="btn btn-primary" onClick={()=>{this.getByDate(this.state.data)}}>selecionar por data</button>
                 </aside>
                 <aside >
                     <Paper style={this.rootStyle}>
@@ -78,6 +62,7 @@ export default class Sorteio extends React.Component {
                                     <TableCell align="left">Gols Time A</TableCell>
                                     <TableCell align="left">Gols Time B</TableCell>
                                     <TableCell align="left">Data do Jogo</TableCell>
+                                    <TableCell align="left"> </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

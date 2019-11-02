@@ -9,6 +9,7 @@ const NavBar = () => {
                     <h5 className="text-white h4"><a style={styleA} href='/Times'>Times</a></h5>
                     <h5 className="text-white h4"><a style={styleA} href='/grupos'>Grupos</a></h5>
                     <h5 className="text-white h4"><a style={styleA} href='/GrupoSeparados'>Grupos Separados</a></h5>
+                    <h5 className="text-white h4"><a style={styleA} href='/filtro'>Mais Opções</a></h5>
                 </div>
             </div>
             <nav className="navbar navbar-dark bg-info">
