@@ -16,14 +16,14 @@ export default class GrupoSeparado extends React.Component {
             TimeC: [],
             TimeD: []
         }
-        this.getTimaA();
+        this.getTimeA();
         this.getTimeB();
         this.getTimeC();
         this.getTimeD();
     }
 
-    getTimaA() {
-        let url = "http://localhost:3001/TimeA"
+    getTimeA() {
+        let url = "http://localhost:3001/Time/A"
         axios.get(url).then(res => {
             let data = res.data
             const sorteio = data.recordset
@@ -34,7 +34,7 @@ export default class GrupoSeparado extends React.Component {
     }
 
     getTimeB() {
-        let url = "http://localhost:3001/TimeB"
+        let url = "http://localhost:3001/Time/B"
         axios.get(url).then(res => {
             let data = res.data
             const sorteio = data.recordset
@@ -45,7 +45,7 @@ export default class GrupoSeparado extends React.Component {
     }
 
     getTimeC() {
-        let url = "http://localhost:3001/TimeC"
+        let url = "http://localhost:3001/Time/C"
         axios.get(url).then(res => {
             let data = res.data
             const sorteio = data.recordset
@@ -56,7 +56,7 @@ export default class GrupoSeparado extends React.Component {
     }
 
     getTimeD() {
-        let url = "http://localhost:3001/TimeD"
+        let url = "http://localhost:3001/Time/D"
         axios.get(url).then(res => {
             let data = res.data
             const sorteio = data.recordset
@@ -67,7 +67,7 @@ export default class GrupoSeparado extends React.Component {
     }
 
     rootStyle = {
-        width: '400px',
+        width: '1000px',
         marginTop: '20px',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -78,73 +78,140 @@ export default class GrupoSeparado extends React.Component {
         return (
             <div>
                 <Paper style={this.rootStyle}>
+                    Grupo A <br />
                     <Table  >
                         <TableHead>
                             <TableRow>
-                                <TableCell align="right">Grupo</TableCell>
                                 <TableCell align="left">Time</TableCell>
+                                <TableCell align="left">Jogos Disputados</TableCell>
+                                <TableCell align="left">Vitorias</TableCell>
+                                <TableCell align="left">Empates</TableCell>
+                                <TableCell align="left">Derrotas</TableCell>
+                                <TableCell align="left">Gols Marcados</TableCell>
+                                <TableCell align="left">Gols Sofridos</TableCell>
+                                <TableCell align="left">Saldo de Gols</TableCell>
+                                <TableCell align="left">Pontos</TableCell>
+                                <TableCell align="left">Situação</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.state.TimeA.map(row => (
-                                <TableRow key={row.id_Grupo}>
-                                    <TableCell align="right">{row.id_Grupo}</TableCell>
-                                    <TableCell align="left">{row.nome_Time}</TableCell>
+                                <TableRow key={row.Time}>
+                                    <TableCell align="right">{row.Time}</TableCell>
+                                    <TableCell align="left">{row.Jogos_Disputados}</TableCell>
+                                    <TableCell align="left">{row.Vitorias}</TableCell>
+                                    <TableCell align="left">{row.Empates}</TableCell>
+                                    <TableCell align="left">{row.Derrotas}</TableCell>
+                                    <TableCell align="left">{row.Gols_Marcados}</TableCell>
+                                    <TableCell align="left">{row.Gols_Sofridos}</TableCell>
+                                    <TableCell align="left">{row.Saldo_de_Gols}</TableCell>
+                                    <TableCell align="left">{row.Pontos}</TableCell>
+                                    <TableCell align="left">{row.Situacao}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
                 </Paper>
                 <Paper style={this.rootStyle}>
+                    Grupo B <br />
                     <Table  >
                         <TableHead>
                             <TableRow>
-                                <TableCell align="right">Grupo</TableCell>
                                 <TableCell align="left">Time</TableCell>
+                                <TableCell align="left">Jogos Disputados</TableCell>
+                                <TableCell align="left">Vitorias</TableCell>
+                                <TableCell align="left">Empates</TableCell>
+                                <TableCell align="left">Derrotas</TableCell>
+                                <TableCell align="left">Gols Marcados</TableCell>
+                                <TableCell align="left">Gols Sofridos</TableCell>
+                                <TableCell align="left">Saldo de Gols</TableCell>
+                                <TableCell align="left">Pontos</TableCell>
+                                <TableCell align="left">Situação</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.state.TimeB.map(row => (
-                                <TableRow key={row.id_Grupo}>
-                                    <TableCell align="right">{row.id_Grupo}</TableCell>
-                                    <TableCell align="left">{row.nome_Time}</TableCell>
+                                <TableRow key={row.Time}>
+                                    <TableCell align="right">{row.Time}</TableCell>
+                                    <TableCell align="left">{row.Jogos_Disputados}</TableCell>
+                                    <TableCell align="left">{row.Vitorias}</TableCell>
+                                    <TableCell align="left">{row.Empates}</TableCell>
+                                    <TableCell align="left">{row.Derrotas}</TableCell>
+                                    <TableCell align="left">{row.Gols_Marcados}</TableCell>
+                                    <TableCell align="left">{row.Gols_Sofridos}</TableCell>
+                                    <TableCell align="left">{row.Saldo_de_Gols}</TableCell>
+                                    <TableCell align="left">{row.Pontos}</TableCell>
+                                    <TableCell align="left">{row.Situacao}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
                 </Paper>
-
                 <Paper style={this.rootStyle}>
+                    Grupo C <br />
                     <Table  >
                         <TableHead>
                             <TableRow>
-                                <TableCell align="right">Grupo</TableCell>
                                 <TableCell align="left">Time</TableCell>
+                                <TableCell align="left">Jogos Disputados</TableCell>
+                                <TableCell align="left">Vitorias</TableCell>
+                                <TableCell align="left">Empates</TableCell>
+                                <TableCell align="left">Derrotas</TableCell>
+                                <TableCell align="left">Gols Marcados</TableCell>
+                                <TableCell align="left">Gols Sofridos</TableCell>
+                                <TableCell align="left">Saldo de Gols</TableCell>
+                                <TableCell align="left">Pontos</TableCell>
+                                <TableCell align="left">Situação</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.state.TimeC.map(row => (
-                                <TableRow key={row.id_Grupo}>
-                                    <TableCell align="right">{row.id_Grupo}</TableCell>
-                                    <TableCell align="left">{row.nome_Time}</TableCell>
+                                <TableRow key={row.Time}>
+                                    <TableCell align="right">{row.Time}</TableCell>
+                                    <TableCell align="left">{row.Jogos_Disputados}</TableCell>
+                                    <TableCell align="left">{row.Vitorias}</TableCell>
+                                    <TableCell align="left">{row.Empates}</TableCell>
+                                    <TableCell align="left">{row.Derrotas}</TableCell>
+                                    <TableCell align="left">{row.Gols_Marcados}</TableCell>
+                                    <TableCell align="left">{row.Gols_Sofridos}</TableCell>
+                                    <TableCell align="left">{row.Saldo_de_Gols}</TableCell>
+                                    <TableCell align="left">{row.Pontos}</TableCell>
+                                    <TableCell align="left">{row.Situacao}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
                 </Paper>
                 <Paper style={this.rootStyle}>
+                    Grupo D <br />
                     <Table  >
                         <TableHead>
                             <TableRow>
-                                <TableCell align="right">Grupo</TableCell>
                                 <TableCell align="left">Time</TableCell>
+                                <TableCell align="left">Jogos Disputados</TableCell>
+                                <TableCell align="left">Vitorias</TableCell>
+                                <TableCell align="left">Empates</TableCell>
+                                <TableCell align="left">Derrotas</TableCell>
+                                <TableCell align="left">Gols Marcados</TableCell>
+                                <TableCell align="left">Gols Sofridos</TableCell>
+                                <TableCell align="left">Saldo de Gols</TableCell>
+                                <TableCell align="left">Pontos</TableCell>
+                                <TableCell align="left">Situação</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.TimeD.map(row => (
-                                <TableRow key={row.id_Grupo}>
-                                    <TableCell align="right">{row.id_Grupo}</TableCell>
-                                    <TableCell align="left">{row.nome_Time}</TableCell>
+                            {this.state.TimeD.map(row =>(
+                                <TableRow key={row.Time}>
+                                    <TableCell align="right">{row.Time}</TableCell>
+                                    <TableCell align="left">{row.Jogos_Disputados}</TableCell>
+                                    <TableCell align="left">{row.Vitorias}</TableCell>
+                                    <TableCell align="left">{row.Empates}</TableCell>
+                                    <TableCell align="left">{row.Derrotas}</TableCell>
+                                    <TableCell align="left">{row.Gols_Marcados}</TableCell>
+                                    <TableCell align="left">{row.Gols_Sofridos}</TableCell>
+                                    <TableCell align="left">{row.Saldo_de_Gols}</TableCell>
+                                    <TableCell align="left">{row.Pontos}</TableCell>
+                                    <TableCell align="left">{row.Situacao}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

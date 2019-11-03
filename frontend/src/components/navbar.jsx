@@ -9,7 +9,7 @@ const NavBar = () => {
                 <div className="p-3 bg-info text-white">
                         <Router>
                             <Link className="text-white h4" to="/sorteio">Sorteio </Link><br/>
-                            <Link className="text-white h4" to='/Times'>Times</Link><br/>
+                            <Link className="text-white h4" to='/Times'>Campeonato</Link><br/>
                             <Link className="text-white h4" to='/grupos'>Grupos</Link><br/>
                             <Link className="text-white h4" to='/GrupoSeparados'>Grupos Separados</Link><br/>
                             <Link className="text-white h4" to='/rebaixados'>Rebaixados</Link><br/>

@@ -26,7 +26,7 @@ app.listen(port, () => {
 });
 
 app.get('/times', (req, res) => {
-    request.query("SELECT * FROM Times", (err, recordset) => {
+    request.query("select * from v_Champ", (err, recordset) => {
         if (err) {
             console.log(err)
         }
@@ -104,34 +104,18 @@ app.get('/gerarSorteio', (req, res) => {
     })
 })
 
-app.get('/TimeA', (req, res) => {
-    request.query("select g.id_Grupo, t.nome_Time from grupos g \n inner join times t \n on g.cod_Time = t.codigo_Time \n where id_grupo = 'a'", (err, recordset) => {
-        if (err) {
-            console.log(err)
-        }
-        res.json(recordset)
-    })
-})
-
-app.get('/TimeB', (req, res) => {
-    request.query("select g.id_Grupo, t.nome_Time from grupos g \n inner join times t \n on g.cod_Time = t.codigo_Time \n where id_grupo = 'b'", (err, recordset) => {
-        if (err) {
-            console.log(err)
-        }
-        res.json(recordset)
-    })
-})
-
-app.get('/TimeC', (req, res) => {
-    request.query("select g.id_Grupo, t.nome_Time from grupos g \n inner join times t \n on g.cod_Time = t.codigo_Time \n where id_grupo = 'c'", (err, recordset) => {
-        if (err) {
-            console.log(err)
-        }
-        res.json(recordset)
-    })
-})
-app.get('/TimeD', (req, res) => {
-    request.query("select g.id_Grupo, t.nome_Time from grupos g \n inner join times t \n on g.cod_Time = t.codigo_Time \n where id_grupo = 'd'", (err, recordset) => {
+app.get('/Time/:grupo', (req, res) => {
+    let grupo = req.params.grupo
+    request.query(`SELECT nomeTime AS 'Time', jogosD AS 'Jogos_Disputados', vitorias AS 'Vitorias', 
+    empates AS 'Empates', derrotas AS 'Derrotas', golsM AS 'Gols_Marcados',
+    golsS AS 'Gols_Sofridos', saldoG AS 'Saldo_de_Gols', pontos AS 'Pontos',
+    CASE WHEN (idT in (SELECT TOP 4 idT FROM fn_Champ() ORDER BY pontos ASC, vitorias ASC, golsM ASC, saldoG ASC)) THEN
+        'Rebaixado'
+    ELSE
+        'Disputante'
+    END AS Situacao
+    FROM fn_Group('${grupo}')
+    ORDER BY pontos DESC, vitorias DESC, golsM DESC, saldoG DESC`, (err, recordset) => {
         if (err) {
             console.log(err)
         }

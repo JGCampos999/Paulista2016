@@ -16,7 +16,7 @@ export default class SimpleTable extends React.Component {
     }
 
     rootStyle = {
-        width: '800px',
+        width: '1100px',
         marginTop:'20px',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -40,19 +40,29 @@ export default class SimpleTable extends React.Component {
                 <Table  >
                     <TableHead>
                         <TableRow>
-                            <TableCell align="right">Codigo</TableCell>
-                            <TableCell align="left">Nome</TableCell>
-                            <TableCell align="left">Cidade</TableCell>
-                            <TableCell align="left">Estadio</TableCell>
+                            <TableCell align="right">Time</TableCell>
+                            <TableCell align="left">Jogos Disputados</TableCell>
+                            <TableCell align="left">Vitorias</TableCell>
+                            <TableCell align="left">Empates</TableCell>
+                            <TableCell align="left">Derrotas</TableCell>
+                            <TableCell align="left">Gols Marcados</TableCell>
+                            <TableCell align="left">Gols Sofridos</TableCell>
+                            <TableCell align="left">Saldo de Gols</TableCell>
+                            <TableCell align="left">Pontos</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.state.rows.map(row => (
-                            <TableRow key={row.codigo_Time}>
-                                <TableCell align="right">{row.codigo_Time}</TableCell>
-                                <TableCell align="left">{row.nome_Time}</TableCell>
-                                <TableCell align="left">{row.cidade}</TableCell>
-                                <TableCell align="left">{row.estadio}</TableCell>
+                            <TableRow key={row.Time}>
+                                <TableCell align="right">{row.Time}</TableCell>
+                                <TableCell align="left">{row.Jogos_Disputados}</TableCell>
+                                <TableCell align="left">{row.Vitorias}</TableCell>
+                                <TableCell align="left">{row.Empates}</TableCell>
+                                <TableCell align="left">{row.Derrotas}</TableCell>
+                                <TableCell align="left">{row.Gols_Marcados}</TableCell>
+                                <TableCell align="left">{row.Gols_Sofridos}</TableCell>
+                                <TableCell align="left">{row.Saldo_de_Gols}</TableCell>
+                                <TableCell align="left">{row.Pontos}</TableCell>  
                             </TableRow>
                         ))}
                     </TableBody>
