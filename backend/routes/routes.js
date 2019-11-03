@@ -22,7 +22,7 @@ app.listen(port, () => {
     }).catch((err) => {
         console.log(err)
     });
-    request = new sql.Request(); 
+    request = new sql.Request();
 });
 
 app.get('/times', (req, res) => {
@@ -35,22 +35,38 @@ app.get('/times', (req, res) => {
 }
 )
 
+app.get('/editar/:id_Jogo/:gols_time_a/:gols_time_b', (req, res) => {
+
+    let id_Jogo = req.params.id_Jogo
+    let gols_time_a = req.params.gols_time_a
+    let gols_time_b = req.params.gols_time_b
+
+    console.log(id_Jogo, gols_time_a, gols_time_b)
+
+    request.query(`EXEC sp_mudaFinal ${id_Jogo}, ${gols_time_a}, ${gols_time_b} `, (err, recordset) => {
+        if (err) {
+            res.status(500).send({ err })
+        }
+        res.send("ok")
+    })
+})
+
 app.get('/filtro/:data', (req, res) => {
     let data = req.params.data
     request.query(`select * from jogos where data = '${data}'`, (err, recordset) => {
         if (err) {
-            res.status(500).send({err})
+            res.status(500).send({ err })
         }
         res.json(recordset)
     })
 })
 
-app.get('/rebaixados', (req, res)=>{
-    request.query('SELECT * FROM v_tRebaixados', (err, recordset)=>{
-        if(err){
+app.get('/rebaixados', (req, res) => {
+    request.query('SELECT * FROM v_tRebaixados', (err, recordset) => {
+        if (err) {
             res.send(err)
         }
-        res.json(recordset) 
+        res.json(recordset)
     })
 })
 

@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Modal from './modal'
+import {Form} from 'react-bootstrap';
 
 class Filtro extends React.Component {
 
@@ -64,13 +65,12 @@ class Filtro extends React.Component {
         return (
             <div>
                 <aside className="ml-5 float-left text-center" style={this.asideStyle}>
-                    <input type="date" onChange={(e) => { this.setState({ data: e.target.value }) }} />
-                    <br />
+                    <Form.Control type="date" placeholder="Alterar data" onChange={(e) => { this.setState({ data: e.target.value }) }} />
                     <br />
                     <button type="button" className="btn btn-primary" onClick={() => { this.getByDate(this.state.data) }}>selecionar por data</button>
                 </aside>
                 <aside >
-                `    <Paper style={this.rootStyle}>
+                    <Paper style={this.rootStyle}>
                         <Table  >
                             <TableHead>
                                 <TableRow>

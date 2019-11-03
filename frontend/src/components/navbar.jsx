@@ -7,7 +7,6 @@ const NavBar = () => {
         <div className="pos-f-t" id="bla">
             <div className="collapse" id="navbarToggleExternalContent">
                 <div className="p-3 bg-info text-white">
-                  
                         <Router>
                             <Link className="text-white h4" to="/sorteio">Sorteio </Link><br/>
                             <Link className="text-white h4" to='/Times'>Times</Link><br/>
@@ -16,7 +15,6 @@ const NavBar = () => {
                             <Link className="text-white h4" to='/rebaixados'>Rebaixados</Link><br/>
                             <Link className="text-white h4" to='/filtro'> Mais Opções </Link><br/>
                         </Router>
-
                 </div>
             </div>
             <nav className="navbar navbar-dark bg-info">
@@ -26,11 +24,6 @@ const NavBar = () => {
             </nav>
         </div>
     )
-}
-
-const styleA = {
-    textDecoration: 'none',
-    color: '#ffffff'
 }
 
 export default NavBar;

@@ -22,7 +22,7 @@ class Rebaixados extends React.Component {
 
         Axios.get(url).then(res => {
             const data = res.data
-            const recordset = data.recordsets
+            const recordset = data.recordsets[0]
             this.setState({
                 rows: recordset
             })
@@ -63,9 +63,11 @@ class Rebaixados extends React.Component {
                         <TableBody>
                             {this.state.rows.map(row => (
                                 <TableRow key={row.Time}>
+                                    <TableCell align="right">{row.Time}</TableCell>
                                     <TableCell align="right">{row.Jogos_Disputados}</TableCell>
                                     <TableCell align="right">{row.Vitorias}</TableCell>
                                     <TableCell align="left">{row.Empates}</TableCell>
+                                    <TableCell align="left">{row.Derrotas}</TableCell>
                                     <TableCell align="left">{row.Gols_Marcados}</TableCell>
                                     <TableCell align="left">{row.Gols_Sofridos}</TableCell>
                                     <TableCell align="left">{row.Saldo_de_Gols}</TableCell>
