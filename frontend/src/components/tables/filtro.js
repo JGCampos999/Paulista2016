@@ -75,8 +75,8 @@ class Filtro extends React.Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="right">ID do Jogo</TableCell>
-                                    <TableCell align="right">Codigo Time A</TableCell>
-                                    <TableCell align="left">Codigo Time B</TableCell>
+                                    <TableCell align="right">Time A</TableCell>
+                                    <TableCell align="left">Time B</TableCell>
                                     <TableCell align="left">Gols Time A</TableCell>
                                     <TableCell align="left">Gols Time B</TableCell>
                                     <TableCell align="left">Data do Jogo</TableCell>
@@ -87,10 +87,10 @@ class Filtro extends React.Component {
                                 {this.state.rows.map(row => (
                                     <TableRow key={row.id_Jogo}>
                                         <TableCell align="right">{row.id_Jogo}</TableCell>
-                                        <TableCell align="right">{row.cod_TimeA}</TableCell>
-                                        <TableCell align="left">{row.cod_TimeB}</TableCell>
-                                        <TableCell align="left">{row.gols_TimeA}</TableCell>
-                                        <TableCell align="left">{row.gols_TimeB}</TableCell>
+                                        <TableCell align="right">{row.timeA}</TableCell>
+                                        <TableCell align="left">{row.timeB}</TableCell>
+                                        <TableCell align="left">{row.golsA}</TableCell>
+                                        <TableCell align="left">{row.golsB}</TableCell>
                                         <TableCell align="left">{row.data.replace("T00:00:00.000Z", "")}</TableCell>
                                         <TableCell align="left"><button type="button" className="btn btn-sm btn-primary"
                                         onClick={()=>{this.handleOpen(row)} } >Editar</button> </TableCell>

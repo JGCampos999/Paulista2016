@@ -6,6 +6,7 @@ import Sorteio from './sorteio'
 import Filtro from './filtro'
 import Rebaixados from './rebaixados'
 import GruposSeparados from './gruposSeparados'
+import Finalistas from './finalistas';
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
           <Route path="/sorteio" component={Sorteio} />
           <Route path="/filtro" component={Filtro} />
           <Route path="/rebaixados" component={Rebaixados} />
+          <Route path="/finalistas" component={Finalistas} />
           <Route path="/GrupoSeparados" component={GruposSeparados} />
         </Switch>
       </BrowserRouter>

@@ -28,12 +28,21 @@ app.listen(port, () => {
 app.get('/times', (req, res) => {
     request.query("select * from v_Champ", (err, recordset) => {
         if (err) {
-            console.log(err)
+            console.log(err) 
         }
         res.json(recordset)
     })
 }
 )
+
+app.get('/final', (req, res) => {
+    request.query("select * from fn_4_Final()", (err, recordset) => {
+        if (err) {
+            console.log(err)
+        }
+        res.json(recordset)
+    })
+})
 
 app.get('/editar/:id_Jogo/:gols_time_a/:gols_time_b', (req, res) => {
 
@@ -53,7 +62,8 @@ app.get('/editar/:id_Jogo/:gols_time_a/:gols_time_b', (req, res) => {
 
 app.get('/filtro/:data', (req, res) => {
     let data = req.params.data
-    request.query(`select * from jogos where data = '${data}'`, (err, recordset) => {
+    request.query(`SELECT id_Jogo, timeA, timeB, golsA, golsB, CONVERT(VARCHAR, data, 103) AS 'data'
+    FROM fn_mostraJogos() where data = '${data}'`, (err, recordset) => {
         if (err) {
             res.status(500).send({ err })
         }
@@ -94,7 +104,7 @@ app.get('/gerarSorteio', (req, res) => {
             if (err) {
                 console.log(err)
             }
-            request.query("select * from v_Jogos", (err, recordset) => {
+            request.query("SELECT timeA AS 'Time_A', timeB AS 'Time_B', golsA AS 'Gols_Time_A', golsB AS 'Gols_Time_B', CONVERT(VARCHAR, data, 103) AS 'Data' FROM fn_mostraJogos()", (err, recordset) => {
                 if (err) {
                     console.log(err)
                 }
@@ -102,7 +112,7 @@ app.get('/gerarSorteio', (req, res) => {
             })
         })
     })
-})
+}) 
 
 app.get('/Time/:grupo', (req, res) => {
     let grupo = req.params.grupo
